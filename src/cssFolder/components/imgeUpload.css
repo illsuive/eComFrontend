@@ -1,0 +1,151 @@
+/* --- Variables --- */
+:root {
+    --cream-bg: #fdfaf5;
+    --cream-dark: #f5efe6;
+    --accent-gold: #c5a059;
+    --text-black: #000000;
+    --text-gray: #4a4a4a;
+    --white: #ffffff;
+    --error-red: #d00000;
+    --transition: all 0.3s ease;
+}
+
+.image-uploader {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+/* --- Label --- */
+.image-uploader > label:first-child {
+    font-size: 0.9rem;
+    font-weight: 800; /* High Contrast Black */
+    color: var(--text-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- Upload Area (Dashed Box) --- */
+.upload-area {
+    cursor: pointer;
+    display: block;
+}
+
+.upload-placeholder {
+    border: 2px dashed var(--cream-dark);
+    background-color: var(--cream-bg);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.upload-placeholder:hover {
+    border-color: var(--accent-gold);
+    background-color: var(--white);
+}
+
+.upload-placeholder span {
+    font-size: 2rem;
+}
+
+.upload-placeholder p {
+    font-weight: 700;
+    color: var(--text-black); /* Solid Black */
+    margin: 0;
+}
+
+.upload-placeholder small {
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
+/* --- Preview Grid --- */
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.preview-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--cream-dark);
+    background: var(--cream-bg);
+}
+
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Preview Overlay (Visible on Hover) --- */
+.preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7); /* Dark overlay for contrast */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.preview-item:hover .preview-overlay {
+    opacity: 1;
+}
+
+.img-name {
+    color: white;
+    font-size: 0.7rem;
+    text-align: center;
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+
+.remove-img-btn {
+    background: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.remove-img-btn:hover {
+    background: #cf1322;
+    transform: scale(1.05);
+}
+
+/* --- Max Reached Message --- */
+.max-reached {
+    color: #2d6a4f; /* Success Green */
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 10px;
+    background: #ecfdf5;
+    border-radius: 8px;
+    border: 1px solid #6ee7b7;
+}
+
+/* --- Mobile Adjustments --- */
+@media (max-width: 480px) {
+    .preview-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

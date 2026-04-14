@@ -1,0 +1,127 @@
+/* --- Order Success Theme --- */
+:root {
+    --cream-bg: #fdfaf5;
+    --cream-dark: #f5efe6;
+    --accent-gold: #c5a059;
+    --text-black: #000000;
+    --text-gray: #555555;
+    --white: #ffffff;
+    --success-green: #2d6a4f;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.order-success-container {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cream-bg);
+    padding: 20px;
+}
+
+/* --- The Success Card --- */
+.success-card {
+    background: var(--white);
+    max-width: 550px;
+    width: 100%;
+    padding: 60px 40px;
+    border-radius: 24px;
+    border: 2px solid var(--cream-dark);
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Animated Success Icon --- */
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #ecfdf5; /* Light green tint */
+    color: var(--success-green);
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid #6ee7b7;
+}
+
+.success-icon svg {
+    width: 40px;
+    height: 40px;
+    /* Optional simple pop-in animation */
+    animation: success-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes success-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Text Styling --- */
+.success-card h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--text-black);
+    margin-bottom: 15px;
+}
+
+.success-card p {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+/* --- Action Buttons --- */
+.order-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.home-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background-color: var(--text-black);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.home-btn:hover {
+    background-color: var(--accent-gold);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2);
+}
+
+.orders-link {
+    display: inline-block;
+    color: var(--text-black);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 2px;
+    transition: var(--transition);
+}
+
+.orders-link:hover {
+    color: var(--accent-gold);
+    border-color: var(--text-black);
+}
+
+/* --- Mobile Breakpoint --- */
+@media (max-width: 480px) {
+    .success-card {
+        padding: 40px 20px;
+    }
+    .success-card h1 {
+        font-size: 1.8rem;
+    }
+}

@@ -1,0 +1,106 @@
+.verify-email-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f4f6;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.verify-email-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Status Icons */
+.status-icon {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e5e7eb;
+    border-top: 4px solid #2563eb;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.check-mark, .cross-mark {
+    font-size: 3rem;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.check-mark {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.cross-mark {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+/* Typography */
+h1 {
+    font-size: 1.75rem;
+    color: #111827;
+    margin-bottom: 12px;
+}
+
+.status-message {
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.redirect-text {
+    font-size: 0.85rem;
+    color: #9ca3af;
+    margin-bottom: 20px;
+}
+
+/* Button */
+.back-btn {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .verify-email-card {
+        padding: 30px 20px;
+        box-shadow: none;
+        background: transparent;
+    }
+}

@@ -1,0 +1,225 @@
+/* --- Home Page Theme --- */
+:root {
+    --cream-bg: #fdfaf5;
+    --cream-dark: #f5efe6;
+    --accent-gold: #c5a059;
+    --text-black: #000000;
+    --text-gray: #4a4a4a;
+    --white: #ffffff;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-wrapper {
+    background-color: var(--cream-bg);
+}
+
+/* --- 1. Hero Banner --- */
+.hero-banner {
+    position: relative;
+    height: 85vh;
+    min-height: 600px;
+    /* Replace with a tech-focused image or gradient */
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.welcome-badge {
+    display: inline-block;
+    background: var(--accent-gold);
+    color: var(--text-black);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin-bottom: 35px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 16px 35px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: var(--white);
+    color: var(--text-black);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: var(--accent-gold);
+    transform: translateY(-5px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.btn-secondary:hover {
+    background: var(--white);
+    color: var(--text-black);
+}
+
+/* --- 2. Features Bar --- */
+.features-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--white);
+    padding: 40px 0;
+    border-bottom: 1px solid var(--cream-dark);
+}
+
+.feature-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    border-right: 1px solid var(--cream-dark);
+}
+
+.feature-item:last-child { border-right: none; }
+
+.feature-item h4 {
+    font-weight: 900;
+    color: var(--text-black);
+    margin: 0;
+}
+
+.feature-item p {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin: 0;
+    font-weight: 600;
+}
+
+/* --- 3. Product Section --- */
+.main-content {
+    max-width: 1300px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--text-black);
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
+/* --- 4. Newsletter CTA --- */
+.newsletter-cta {
+    padding: 100px 20px;
+    background: var(--cream-dark);
+}
+
+.newsletter-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--text-black);
+    padding: 60px;
+    border-radius: 30px;
+    text-align: center;
+    color: var(--white);
+}
+
+.newsletter-card h2 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.newsletter-card p {
+    margin-bottom: 35px;
+    opacity: 0.8;
+}
+
+.subscribe-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.subscribe-form input {
+    flex: 1;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 700;
+    color: var(--text-black);
+}
+
+.subscribe-form button {
+    background: var(--accent-gold);
+    color: var(--text-black);
+    padding: 0 30px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 900;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.subscribe-form button:hover {
+    transform: scale(1.05);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .features-bar { grid-template-columns: 1fr; gap: 30px; }
+    .feature-item { border-right: none; border-bottom: 1px solid var(--cream-dark); padding-bottom: 20px; }
+    .feature-item:last-child { border-bottom: none; }
+    .hero-actions { flex-direction: column; }
+    .newsletter-card { padding: 40px 20px; }
+    .subscribe-form { flex-direction: column; }
+}

@@ -1,0 +1,146 @@
+/* dashboard.css */
+
+:root{
+  --panel: #ffffff;
+  --panel-2: #fcfaf5;
+  --border: #eae1d5;
+
+  --text: #4a443c;
+  --muted: #8b7e6b;
+
+  --primary: #b8a689;
+
+  --radius: 18px;
+  --shadow: 0 8px 24px rgba(139, 126, 107, 0.08);
+}
+
+/* Layout */
+.dashboard-wrapper{
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 18px 14px 40px;
+
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+
+  color: var(--text);
+}
+
+/* Sidebar */
+.dashboard-sidebar{
+  position: sticky;
+  top: 16px;
+  height: calc(100dvh - 32px);
+
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 8px);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-logo{
+  padding: 16px 14px 12px;
+  border-bottom: 1px solid var(--border);
+  background: #fdfbf7;
+}
+
+.sidebar-logo h2{
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 1250;
+  letter-spacing: -0.25px;
+  color: var(--text);
+}
+
+.sidebar-nav{
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.sidebar-nav a{
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 1100;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 16px;
+
+  background: #ffffff;
+  border: 1px solid transparent;
+
+  transition: transform .15s ease, background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.sidebar-nav a:hover{
+  transform: translateY(-1px);
+  background: #f7f3eb;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* NavLink active class */
+.sidebar-nav a.active{
+  background: #f0eadd;
+  border-color: var(--primary);
+  color: var(--text);
+  box-shadow: 0 0 0 2px rgba(184, 166, 137, 0.2);
+}
+
+.sidebar-nav a:focus-visible{
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Main content area */
+.dashboard-main{
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 8px);
+  background: #fdfbf7;
+  box-shadow: inset 0 2px 8px rgba(139, 126, 107, 0.05);
+
+  padding: 16px;
+  min-height: 70dvh;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .dashboard-wrapper{
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-sidebar{
+    position: static;
+    height: auto;
+  }
+
+  .sidebar-nav{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px){
+  .sidebar-nav{
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-main{
+    padding: 14px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .sidebar-nav a{
+    transition: none;
+  }
+}
