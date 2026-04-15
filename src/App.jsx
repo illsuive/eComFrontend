@@ -18,7 +18,6 @@ import OrderSuccessPage from './screens/orderSucces.jsx'
 import ForgotPasswordPage from './screens/forgotPassword.jsx';
 import VerifyOtpPage from './screens/verifyOtp.jsx';
 
-
 // admin routes 
 
 import AdminAddProductsPage from './screens/admin/adminAddProducts.jsx'
@@ -48,7 +47,6 @@ function App() {
          <Route path="/success" element={<ProctedRoutes><OrderSuccessPage /></ProctedRoutes>} />
          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
          <Route path="/verify-otp/:email" element={<VerifyOtpPage />} />
-
 
         {/* admin routes  */}
 
