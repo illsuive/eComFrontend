@@ -1,134 +1,119 @@
-/* --- Signup Page Variables --- */
+/* --- Root Variables --- */
 :root {
     --cream-bg: #fdfaf5;
     --cream-dark: #f5efe6;
     --accent-gold: #c5a059;
     --text-black: #000000;
-    --text-gray: #4a4a4a;
+    --text-gray: #555555;
     --white: #ffffff;
     --success-green: #2d6a4f;
     --error-red: #d00000;
-    --transition: all 0.3s ease;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .signup-container {
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     background-color: var(--cream-bg);
-    padding: 40px 20px;
+    padding: 15px; /* Critical for mobile edges */
 }
 
-/* --- Signup Card Layout --- */
+/* --- Signup Card --- */
 .signup-card {
+    display: flex;
     background: var(--white);
     width: 100%;
-    max-width: 1100px;
-    display: flex;
+    max-width: 1000px;
+    min-height: 650px;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--cream-dark);
+    border: 2px solid var(--cream-dark);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
 }
 
 /* --- Form Section --- */
 .signup-form-section {
-    flex: 1.2;
-    padding: 50px;
+    flex: 1;
+    padding: 40px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
-.signup-form-section .header h1 {
+.header h1 {
     font-size: 2rem;
+    font-weight: 900;
     color: var(--text-black);
     margin-bottom: 8px;
-    font-weight: 800;
 }
 
-.signup-form-section .header p {
+.header p {
     color: var(--text-gray);
-    margin-bottom: 30px;
+    font-weight: 600;
+    margin-bottom: 25px;
 }
 
-/* --- Status Banners (Success/Error) --- */
+/* --- Status Banners --- */
 .status-banner {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 700;
     font-size: 0.9rem;
-    font-weight: 600;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-.status-banner.success {
-    background-color: #ecfdf5;
-    color: var(--success-green);
-    border: 1px solid #6ee7b7;
-}
+.status-banner.success { background: #ecfdf5; color: var(--success-green); border: 1px solid #6ee7b7; }
+.status-banner.error { background: #fff1f0; color: var(--error-red); border: 1px solid #ffa39e; }
 
-.status-banner.error {
-    background-color: #fff1f0;
-    color: var(--error-red);
-    border: 1px solid #ffa39e;
-}
-
-/* --- Form Inputs --- */
+/* --- Form Elements --- */
 .signup-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Split names into two columns */
-    gap: 18px;
-}
-
-/* Make Email and Password span both columns */
-.input-group:nth-child(4), 
-.input-group:nth-child(5),
-.signup-btn {
-    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .input-group label {
     font-size: 0.85rem;
-    font-weight: 800; /* High Contrast */
+    font-weight: 800;
     color: var(--text-black);
+    text-transform: uppercase;
 }
 
 .input-group input {
-    width: 100%;
-    padding: 12px 16px;
+    padding: 14px;
     border: 2px solid var(--cream-dark);
-    border-radius: 10px;
-    font-size: 0.95rem;
-    background-color: var(--cream-bg);
+    border-radius: 12px;
+    background: var(--cream-bg);
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--text-black);
-    font-weight: 600;
     transition: var(--transition);
-}
-
-/* HIGH VISIBILITY PLACEHOLDERS */
-.input-group input::placeholder {
-    color: #777777; 
-    opacity: 1;
+    outline: none;
 }
 
 .input-group input:focus {
-    outline: none;
     border-color: var(--accent-gold);
-    background-color: var(--white);
-    box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.1);
+    background: var(--white);
 }
 
-/* --- Password Wrapper & Toggle --- */
+/* --- Password Wrapper --- */
 .password-wrapper {
     position: relative;
+    display: flex;
+}
+
+.password-wrapper input {
     width: 100%;
+    padding-right: 60px;
 }
 
 .toggle-password {
@@ -138,99 +123,108 @@
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: var(--text-black);
     font-weight: 800;
-    font-size: 0.7rem;
-    text-transform: uppercase;
+    color: var(--accent-gold);
     cursor: pointer;
+    font-size: 0.85rem;
 }
 
-/* --- Sign Up Button --- */
+/* --- Signup Button --- */
 .signup-btn {
-    background-color: #262626;
-    color: var(--white);
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
     margin-top: 10px;
+    padding: 16px;
+    background: var(--text-black);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
     transition: var(--transition);
 }
 
-.signup-btn:hover:not(:disabled) {
-    background-color: var(--accent-gold);
-    transform: translateY(-2px);
-}
+.signup-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.signup-btn:hover:not(:disabled) { background: var(--accent-gold); }
 
-.signup-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* --- Footer Link --- */
 .footer-text {
     margin-top: 25px;
     text-align: center;
-    color: var(--text-gray);
-    font-size: 0.9rem;
+    font-weight: 700;
 }
 
 .footer-text a {
-    color: var(--text-black);
-    font-weight: 800;
-    text-decoration: underline;
+    color: var(--accent-gold);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
 }
 
-/* --- Visual Section --- */
+.footer-text a:hover { border-bottom-color: var(--accent-gold); }
+
+/* --- Visual Section (Hidden on Mobile) --- */
 .signup-visual-section {
-    flex: 0.8;
-    background: linear-gradient(135deg, var(--accent-gold) 0%, #b38f4d 100%);
-    padding: 50px;
+    flex: 1;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    padding: 40px;
     color: var(--white);
-    text-align: center;
 }
 
-.overlay-content h2 {
-    font-size: 2.2rem;
-    margin-bottom: 15px;
-    font-weight: 800;
-}
-
-.overlay-content p {
-    font-size: 1rem;
-    line-height: 1.6;
-    opacity: 0.9;
-}
+.overlay-content h2 { font-size: 2rem; font-weight: 900; margin-bottom: 10px;color: white;}
+.overlay-content p { font-weight: 600; opacity: 0.9; }
 
 /* --- Loading Overlay --- */
 .loading-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(253, 250, 245, 0.9);
-    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 100;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
 }
 
-.loading-overlay p {
-    font-weight: 700;
-    color: var(--text-black);
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--cream-dark);
+    border-top-color: var(--accent-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
 }
 
-/* --- Responsive Layout --- */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- RESPONSIVE BREAKPOINTS (iPhone 13 Focus) --- */
 @media (max-width: 900px) {
-    .signup-visual-section { display: none; }
-    .signup-card { max-width: 600px; }
-    .signup-form { grid-template-columns: 1fr; }
-    .input-group:nth-child(1), .input-group:nth-child(2), .input-group:nth-child(3) {
-        grid-column: span 1;
+    .signup-visual-section {
+        display: none; /* Hide the big image section on tablets/phones */
     }
+
+    .signup-card {
+        max-width: 500px; /* Center the form */
+    }
+}
+
+@media (max-width: 480px) {
+    .signup-container {
+        padding: 10px;
+        background-color: var(--white); /* Seamless look for mobile */
+    }
+
+    .signup-card {
+        border: none;
+        box-shadow: none;
+    }
+
+    .signup-form-section {
+        padding: 20px 10px;
+    }
+
+    .header h1 { font-size: 1.8rem; }
 }

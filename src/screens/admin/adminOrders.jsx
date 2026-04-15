@@ -66,15 +66,7 @@ const AdminOrdersPage = () => {
                                 <p className="amount-highlight">${order.amount.toFixed(2)}</p>
                                 <p className="sub-text">Total Price</p>
                             </div>
-                            <div className="info-group actions">
-                                {/* Button to view specific order details */}
-                                <button 
-                                    className="view-details-btn"
-                                    onClick={() => navigate(`/admin/order/${order._id}`)}
-                                >
-                                    View Full Details
-                                </button>
-                            </div>
+                         
                         </div>
 
                         {/* 3. Mini Product Preview */}

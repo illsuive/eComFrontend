@@ -15,6 +15,9 @@ import ProctedRoutes from './components/ProtectedRoute.jsx'
 import ProductDetailsPage from './screens/productDetails.jsx'
 import AddressFormPage from './screens/addressForm.jsx'
 import OrderSuccessPage from './screens/orderSucces.jsx'
+import ForgotPasswordPage from './screens/forgotPassword.jsx';
+import VerifyOtpPage from './screens/verifyOtp.jsx';
+
 
 // admin routes 
 
@@ -25,7 +28,6 @@ import AdminOrdersPage from './screens/admin/adminOrders.jsx'
 import AdminUserInfoPage from './screens/admin/adminUserInfo.jsx'
 import AdminOrderDataPage from './screens/admin/adminOrderData.jsx'
 import AdminSalesReportPage from './screens/admin/adminSalesReport.jsx'
-
 
 function App() {
 
@@ -44,6 +46,9 @@ function App() {
         <Route path="/product/:id" element={<ProductDetailsPage />} />
          <Route path="/address" element={<ProctedRoutes><AddressFormPage /></ProctedRoutes>} />
          <Route path="/success" element={<ProctedRoutes><OrderSuccessPage /></ProctedRoutes>} />
+         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+         <Route path="/verify-otp/:email" element={<VerifyOtpPage />} />
+
 
         {/* admin routes  */}
 

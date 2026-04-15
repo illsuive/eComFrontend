@@ -103,9 +103,9 @@ const AdminUserInfoPage = () => {
                     <button className={activeTab === 'details' ? 'active' : ''} onClick={() => setActiveTab('details')}>
                         👤 User Details
                     </button>
-                    <button className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>
+                    {/* <button className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>
                         📦 User Orders
-                    </button>
+                    </button> */}
                     <button className="back-nav" onClick={() => navigate(-1)}>
                         ⬅ Back to Users
                     </button>
