@@ -1,4 +1,3 @@
-/* --- Admin Orders Dashboard Theme --- */
 :root {
     --cream-bg: #fdfaf5;
     --cream-dark: #f5efe6;
@@ -6,7 +5,6 @@
     --text-black: #000000;
     --text-gray: #555555;
     --white: #ffffff;
-    --success-green: #2d6a4f;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -14,243 +12,154 @@
     max-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
+    overflow-x: hidden; /* Prevents page-level horizontal scroll */
 }
 
-/* --- Header Section --- */
-.page-header {
-    margin-bottom: 40px;
-    border-bottom: 2px solid var(--cream-dark);
-    padding-bottom: 20px;
-}
-
-.page-header h1 {
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: var(--text-black);
-}
-
-.page-header p {
-    font-weight: 700;
-    color: var(--text-gray);
-    margin-top: 5px;
-}
-
-/* --- Order Card Styling --- */
-.orders-list {
+/* --- Dashboard Header --- */
+.dashboard-header {
     display: flex;
-    flex-direction: column;
-    gap: 30px;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
-.order-card {
+.dashboard-header h1 { font-size: clamp(1.8rem, 4vw, 2.2rem); font-weight: 900; color: var(--text-black); }
+.dashboard-header p { font-weight: 700; color: var(--accent-gold); text-transform: uppercase; font-size: 0.8rem; }
+
+/* --- Table Structure --- */
+.orders-table-wrapper {
     background: var(--white);
     border: 2px solid var(--cream-dark);
     border-radius: 20px;
-    padding: 30px;
-    transition: var(--transition);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-}
-
-.order-card:hover {
-    border-color: var(--accent-gold);
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(197, 160, 89, 0.1);
-}
-
-/* --- 1. Card Top Bar --- */
-.order-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 25px;
-    border-bottom: 1px solid var(--cream-dark);
-    padding-bottom: 15px;
-}
-
-.order-label {
-    font-size: 0.75rem;
-    font-weight: 900;
-    letter-spacing: 1px;
-    color: var(--text-gray);
-}
-
-.order-card-header h3 {
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: var(--text-black);
-    font-family: monospace;
-}
-
-.order-meta {
-    text-align: right;
-}
-
-.order-date {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-gray);
-    margin-top: 5px;
-}
-
-/* --- Status Badges --- */
-.status-badge {
-    padding: 6px 14px;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    border: 1px solid transparent;
-}
-
-.status-badge.paid, .status-badge.delivered {
-    background: #ecfdf5;
-    color: var(--success-green);
-    border-color: #6ee7b7;
-}
-
-.status-badge.pending {
-    background: #fffbeb;
-    color: #d97706;
-    border-color: #fcd34d;
-}
-
-/* --- 2. Information Grid --- */
-.order-info-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.info-group h4 {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-gray);
-    margin-bottom: 10px;
-}
-
-.info-group p {
-    font-weight: 700;
-    color: var(--text-black);
-}
-
-.amount-highlight {
-    font-size: 1.5rem;
-    font-weight: 900 !important;
-    color: var(--text-black) !important;
-}
-
-.sub-text {
-    font-size: 0.85rem;
-    color: var(--text-gray) !important;
-    font-weight: 500 !important;
-}
-
-/* --- View Details Button --- */
-.view-details-btn {
+    overflow: hidden;
     width: 100%;
-    padding: 14px;
-    background-color: var(--text-black);
-    color: var(--white);
-    border: none;
-    border-radius: 12px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: var(--transition);
 }
 
-.view-details-btn:hover {
-    background-color: var(--accent-gold);
+/* DESKTOP ROW STYLE */
+.table-row {
+    display: grid;
+    grid-template-columns: 100px 1.5fr 1fr 120px 120px 80px;
+    padding: 20px;
+    align-items: center;
+    border-bottom: 1px solid var(--cream-dark);
+    gap: 10px;
 }
 
-/* --- 3. Mini Product Preview --- */
-.order-items-preview h4 {
-    font-size: 0.8rem;
+.table-row.head {
+    background: var(--cream-bg);
+    font-weight: 900;
     text-transform: uppercase;
-    margin-bottom: 15px;
-    color: var(--text-gray);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
 }
 
-.items-scroll-row {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+.main-data { cursor: pointer; transition: var(--transition); }
+.main-data:hover { background: var(--cream-bg); }
+
+.id-cell { font-family: monospace; font-weight: 800; color: var(--text-gray); }
+.name-cell { font-weight: 800; color: var(--text-black); }
+.price-cell { font-weight: 900; color: var(--text-black); }
+
+/* --- Badges --- */
+.badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    display: inline-block;
+}
+.badge.paid { background: #ecfdf5; color: #065f46; }
+.badge.pending { background: #fffbeb; color: #92400e; }
+
+/* --- Collapsible Drawer --- */
+.order-details-drawer {
+    background: #fafafa;
+    padding: clamp(20px, 5vw, 40px);
+    border-bottom: 1px solid var(--cream-dark);
+    animation: slideDown 0.3s ease-out;
 }
 
-/* Custom Scrollbar for mini items */
-.items-scroll-row::-webkit-scrollbar { height: 6px; }
-.items-scroll-row::-webkit-scrollbar-track { background: var(--cream-bg); }
-.items-scroll-row::-webkit-scrollbar-thumb { background: var(--cream-dark); border-radius: 10px; }
+.drawer-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
 
-.mini-item-card {
-    min-width: 240px;
+.mini-p-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    background: var(--cream-bg);
+    gap: 15px;
+    background: #fff;
     padding: 10px;
     border-radius: 12px;
     border: 1px solid var(--cream-dark);
+    margin-bottom: 10px;
 }
 
-.mini-item-card img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 8px;
-}
+.mini-p-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; }
 
-.mini-item-details .item-name {
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: var(--text-black);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 150px;
-}
-
-.mini-item-details .item-qty {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--text-gray);
-}
-
-/* --- Loading & Empty States --- */
-.loader-container, .no-data {
-    height: 60vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 800;
-    color: var(--accent-gold);
-    font-size: 1.2rem;
-}
-
-/* --- Responsive Adjustments --- */
+/* --- MOBILE RESPONSIVE LOGIC --- */
 @media (max-width: 900px) {
-    .order-info-grid {
-        grid-template-columns: 1fr 1fr;
+    /* Hide the table header on small screens */
+    .table-row.head {
+        display: none;
     }
-    .info-group.actions {
-        grid-column: span 2;
-    }
-}
 
-@media (max-width: 600px) {
-    .order-card-header {
-        flex-direction: column;
+    /* Transform the row into a card */
+    .table-row {
+        grid-template-columns: 1fr 1fr; /* Two columns: ID/Name and Price/Status */
+        padding: 20px;
         gap: 15px;
     }
-    .order-meta {
+
+    /* Actions Button spans full width at the bottom of the "card" */
+    .table-row span:last-child {
+        grid-column: span 2;
+    }
+
+    .table-row span:nth-child(3) { /* Hide Date on very small mobile */
+        display: none;
+    }
+
+    .price-cell {
+        text-align: right;
+    }
+
+    .drawer-grid {
+        grid-template-columns: 1fr; /* Stack Contact and Products vertically */
+    }
+
+    .expand-btn {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-orders-container {
+        padding: 0 10px;
+    }
+
+    .table-row {
+        grid-template-columns: 1fr; /* Full stack on tiny screens */
         text-align: left;
     }
-    .order-info-grid {
-        grid-template-columns: 1fr;
+
+    .price-cell {
+        text-align: left;
+        font-size: 1.2rem;
     }
-    .info-group.actions {
-        grid-column: span 1;
+
+    .order-details-drawer {
+        padding: 20px 15px;
     }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }

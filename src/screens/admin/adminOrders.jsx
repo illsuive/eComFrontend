@@ -1,98 +1,105 @@
-import '../../cssFolder/screens/admin/adminOrders.css'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom' // Added for navigation
+import '../../cssFolder/screens/admin/adminOrders.css';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 const AdminOrdersPage = () => {
-    const [orders, setOrders] = useState([])
-    const [loading, setLoading] = useState(true)
-    const navigate = useNavigate()
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [expandedOrder, setExpandedOrder] = useState(null); // Track which order is open
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_URL}/orders/fetch-all-orders`, {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                })
-                setOrders(response.data.orders)
-                setLoading(false)
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                setOrders(response.data.orders);
             } catch (error) {
-                console.error('Error fetching orders:', error)
-                setLoading(false)
+                console.error('Error:', error);
+            } finally {
+                setLoading(false);
             }
-        }
-        fetchOrders()
-    }, [])
+        };
+        fetchOrders();
+    }, []);
 
-    if (loading) return <div className="loader-container">Loading orders...</div>
-    if (orders.length === 0) return <div className="no-data">No orders found.</div>
+    const toggleOrder = (id) => {
+        setExpandedOrder(expandedOrder === id ? null : id);
+    };
+
+    if (loading) return <div className="admin-loader">Securely fetching records...</div>;
 
     return (
         <div className="admin-orders-container">
-            <header className="page-header">
-                <h1>Order Management</h1>
-                <p>Total Orders: {orders.length}</p>
+            <header className="dashboard-header">
+                <div>
+                    <h1>Order Ledger</h1>
+                    <p>{orders.length} transactions recorded</p>
+                </div>
+                <div className="status-legend">
+                    <span className="dot paid"></span> Paid 
+                    <span className="dot pending"></span> Pending
+                </div>
             </header>
 
-            <div className="orders-list">
-                {orders.map(order => (
-                    <div key={order._id} className="order-card">
-                        
-                        {/* 1. Order Top Bar */}
-                        <div className="order-card-header">
-                            <div>
-                                <span className="order-label">ORDER ID</span>
-                                <h3>#{order._id.slice(-8).toUpperCase()}</h3>
-                            </div>
-                            <div className="order-meta">
-                                <span className={`status-badge ${order.status.toLowerCase()}`}>
-                                    {order.status}
-                                </span>
-                                <p className="order-date">{new Date(order.createdAt).toLocaleDateString()}</p>
-                            </div>
+            <div className="orders-table-wrapper">
+                {/* Table Header */}
+                <div className="table-row head">
+                    <span>Order ID</span>
+                    <span>Customer</span>
+                    <span>Date</span>
+                    <span>Amount</span>
+                    <span>Status</span>
+                    <span>Action</span>
+                </div>
+
+                {/* Orders List */}
+                {orders.map((order) => (
+                    <div key={order._id} className={`order-row-group ${expandedOrder === order._id ? 'is-open' : ''}`}>
+                        <div className="table-row main-data" onClick={() => toggleOrder(order._id)}>
+                            <span className="id-cell">#{order._id.slice(-6).toUpperCase()}</span>
+                            <span className="name-cell">{order.userId.firstName} {order.userId.lastName}</span>
+                            <span>{new Date(order.createdAt).toLocaleDateString()}</span>
+                            <span className="price-cell">${order.amount.toFixed(2)}</span>
+                            <span>
+                                <span className={`badge ${order.status.toLowerCase()}`}>{order.status}</span>
+                            </span>
+                            <span>
+                                <button className="expand-btn">{expandedOrder === order._id ? 'Close' : 'View'}</button>
+                            </span>
                         </div>
 
-                        {/* 2. Customer & Financial Summary */}
-                        <div className="order-info-grid">
-                            <div className="info-group">
-                                <h4>Customer</h4>
-                                <p><strong>{order.userId.firstName} {order.userId.lastName}</strong></p>
-                                <p className="sub-text">{order.userId.email}</p>
-                            </div>
-                            <div className="info-group">
-                                <h4>Payment</h4>
-                                <p className="amount-highlight">${order.amount.toFixed(2)}</p>
-                                <p className="sub-text">Total Price</p>
-                            </div>
-                         
-                        </div>
-
-                        {/* 3. Mini Product Preview */}
-                        <div className="order-items-preview">
-                            <h4>Items ({order.products.length})</h4>
-                            <div className="items-scroll-row">
-                                {order.products.map(item => (
-                                    <div key={item._id} className="mini-item-card">
-                                        <img 
-                                            src={item.productId.productImgs[0]?.url} 
-                                            alt={item.productId.productName} 
-                                        />
-                                        <div className="mini-item-details">
-                                            <p className="item-name">{item.productId.productName}</p>
-                                            <p className="item-qty">Qty: {item.quantity} × ${item.price}</p>
+                        {/* Collapsible Details Area */}
+                        {expandedOrder === order._id && (
+                            <div className="order-details-drawer">
+                                <div className="drawer-grid">
+                                    <div className="contact-info">
+                                        <h5>Contact Details</h5>
+                                        <p>{order.userId.email}</p>
+                                        <p>User ID: {order.userId._id}</p>
+                                    </div>
+                                    <div className="product-snapshot">
+                                        <h5>Ordered Items ({order.products.length})</h5>
+                                        <div className="mini-product-list">
+                                            {order.products.map(p => (
+                                                <div key={p._id} className="mini-p-item">
+                                                    <img src={p.productId.productImgs[0]?.url} alt="" />
+                                                    <div>
+                                                        <p><strong>{p.productId.productName}</strong></p>
+                                                        <p>Qty: {p.quantity} × ${p.price}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
-                                ))}
+                                </div>
                             </div>
-                        </div>
-
+                        )}
                     </div>
                 ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default AdminOrdersPage;
