@@ -10,7 +10,6 @@ const VerifyOtpPage = () => {
     const [activeTab, setActiveTab] = useState('verifyTab');
     const [isLoading, setIsLoading] = useState(false);
    
-    
     // Form States
     const [otp, setOtp] = useState('');
     const [password, setPassword] = useState('');

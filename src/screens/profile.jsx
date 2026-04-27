@@ -250,34 +250,65 @@ const Profile = () => {
                     </section>
                 ) : (
                     <section className="orders-card">
-                        <h2>Order History</h2>
+                        <div className="section-title-row">
+                            <h2>Order History</h2>
+                            <span className="order-count">{orders.length} Orders</span>
+                        </div>
+
                         {loading ? (
-                            <p>Loading orders...</p>
+                            <div className="order-loader">Loading your history...</div>
                         ) : orders.length > 0 ? (
                             <div className="orders-list">
                                 {orders.map((order) => (
-                                    <div key={order._id} className="order-item">
-                                        <p>Order ID: {order._id}</p>
-                                        <p>Status: {order.status}</p>
-                                        <p>Total: ${order.amount}</p>
-                                        {
-                                            order.products.map((product) => (
-                                                <div key={product._id} onClick={()=> ProuctDetails(product.productId._id)} >
-                                                    
-                                                    <img src={product.productId.productImgs[0].url} alt={product.productId.productName} />
-                                                    <p >{product.productId.productName} - ${product.productId.productPrice} x {product.quantity}</p>
-                                                    <p>{product.description}</p>
+                                    <div key={order._id} className="order-card">
+                                        <div className="order-header">
+                                            <div className="order-meta">
+                                                <span className="order-id">ID: #{order._id.slice(-8).toUpperCase()}</span>
+                                                <span className="order-date">{new Date(order.createdAt).toLocaleDateString()}</span>
+                                            </div>
+                                            <div className={`order-status status-${order.status.toLowerCase()}`}>
+                                                {order.status}
+                                            </div>
+                                        </div>
+
+                                        <div className="order-items">
+                                            {order.products.map((item) => (
+                                                <div
+                                                    key={item._id}
+                                                    className="product-row"
+                                                    onClick={() => ProuctDetails(item.productId?._id)}
+                                                >
+                                                    <div className="product-img-wrapper">
+                                                        <img
+                                                            src={item.productId?.productImgs?.[0]?.url || 'placeholder.jpg'}
+                                                            alt={item.productId?.productName}
+                                                        />
+                                                    </div>
+                                                    <div className="product-info">
+                                                        <h4>{item.productId?.productName || "Product Unavailable"}</h4>
+                                                        <p className="product-qty">Qty: {item.quantity}</p>
+                                                        <p className="product-price">${item.productId?.productPrice || 0}</p>
+                                                    </div>
+                                                    <div className="view-arrow">→</div>
                                                 </div>
-                                                
-                                            ))
-                                        }
+                                            ))}
+                                        </div>
+
+                                        <div className="order-footer">
+                                            <div className="order-total">
+                                                Total Amount: <span>${order.amount}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
                         ) : (
                             <div className="empty-orders">
-                                <p>No orders found.</p>
-                                <button className="shop-now-btn" onClick={() => navigate('/')}>Shop Now</button>
+                                <div className="empty-icon">📦</div>
+                                <p>You haven't placed any orders yet.</p>
+                                <button className="shop-now-btn" onClick={() => navigate('/')}>
+                                    Start Shopping
+                                </button>
                             </div>
                         )}
                     </section>
